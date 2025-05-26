@@ -1,5 +1,0 @@
-# Created at 2025-05-23T10:44:59.809
-Boot Manifest-JAR contains absolute paths in classpath 'D:\eGovFrameDev-4.3.0-64bit\workspace-egov\di\target\test-classes'
-Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
-'other' has different root
-
