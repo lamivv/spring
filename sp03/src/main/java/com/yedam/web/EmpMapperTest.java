@@ -1,6 +1,8 @@
 package com.yedam.web;
 
-import java.util.Arrays;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
+
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,6 +14,9 @@ import com.yedam.web.mapper.EmpMapper;
 import com.yedam.web.model.Employees;
 import com.yedam.web.model.SearchVO;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({"classpath:/spring/datasource-context.xml",
 					   "classpath:/spring/mybatis-context.xml"})
@@ -19,11 +24,18 @@ public class EmpMapperTest {
 	@Autowired EmpMapper empMapper;
 	
 	@Test
+	public void findEmployeeDepartment() {
+		List<Employees> list = empMapper.findEmployeeDepartment();
+		//log.info(list.toString());
+		list.forEach(emp -> log.info(emp.getFirstName() + ":" + emp.getDepartment().getDepartmentName()));
+	}
+	
+	//@Test
 	public void 전체조회() {
 		SearchVO searchVO = new SearchVO();
-		//searchVO.setDepartmentId("30");
-		// searchVO.setSalary("2600");
-		searchVO.setIds(Arrays.asList(100,101,102));
+		searchVO.setDepartmentId("30");
+		searchVO.setSalary("2600");
+		//searchVO.setIds(Arrays.asList(100,101,102));
 		
 		empMapper.findAll(searchVO).forEach(emp->System.out.println( emp.getEmployeeId() + ":" + emp.getDepartmentId() ));
 	}

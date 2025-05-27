@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yedam.web.mapper.EmpMapper">
+
+	<resultMap type="employees" id="employeeMap">
+		<id column="employee_id" property="employeeId"/> 
+		<result column="first_name" property="firstName"/>
+		<result column="last_name" property="lastName"/>
+		<association property="department" >
+			<result column="department_name" property="departmentName"/> 
+		</association>
+	</resultMap>
+	<select id="findEmployeeDepartment" resultMap="employeeMap">
+		select e.*, 
+			   d.department_id,
+			   d.department_name,
+			   d.manager_id,
+			   d.location_id
+		from employees e join departments d 
+		on e.department_id = d.department_id
+	</select>
+
+
 	<select id="findAll" resultType="employees" parameterType="SearchVO">
 		select * from employees
 		<where>
