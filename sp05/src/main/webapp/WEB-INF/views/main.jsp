@@ -17,5 +17,9 @@ ${param.name }<br>
 ${param.age }<br>
 <hr>
 ${dept }
+<hr>
+name: ${param.name }<br>
+msg: ${msg }<br>
+
 </body>
 </html>
