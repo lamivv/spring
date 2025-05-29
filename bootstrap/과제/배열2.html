@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ 	<meta charset="UTF-8">
+ 	<meta name="viewport"content="width=device-width,	initial-scale=1.0">
+ 	<title>addtr.html</title>
+</head>
+<body>
+ 	<button id="btn">추가</button>
+ 	<table border="1">
+ 	  <tr>
+ 	    <td>이름</td>
+ 	    <td>성적</td>
+ 	    <td></td>
+ 	  </tr>
+ 	  <tbody id=“tbl”>
+ 	    <tr>
+ 	      <td>이기자</td>
+ 	      <td>100</td>
+ 	      <td><button type='button'>X</button></td>
+ 	    </tr>
+ 	  </tboby>
+ 	</table>
+ 	<script>
+ 	 	datas =	[
+    {	name:'홍길동',	score:100 },
+ 	 	{	name:'김유신',	score:60 },
+ 	 	{	name:'신데렐라',	score:90 },
+ 	 	{	name:'손흥민',	score:90 }];
+ 	 	//추가	버튼	클릭	하면		<tr>	태그를	만들어서	<tbody>에	추가
+ 	 	btn.addEventListener("click",	function ()	{
+			let html = '';
+      html = datas.forEach(datas => {
+        document.querySelector('tbody').insertAdjacentHTML("afterend", 
+        `<tr>
+          <td>${datas.name}</td>
+          <td>${datas.score}</td>
+          <td><button type='button'>X</button></td>
+        </tr>`);
+      });
+ 	 	});
+ 	 	//	X버튼를	클릭하면	해당	행의	tr	태그를	삭제하는	이벤트	추가
+    // 모르겠는디
+    
+ 	</script>
+</body>
+</html>

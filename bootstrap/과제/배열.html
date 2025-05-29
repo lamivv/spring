@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>텍스트 추가/검색</title>
+  <style>
+    #result {
+      border: 1px solid blue;
+      width: 300px;
+      height: 200px;
+    }
+  </style>
+  <script>
+    let txtArr = [];
+    window.onload = function () {
+      btnAdd.addEventListener("click", funcAdd)
+      btnDelete.addEventListener("click", funcDelete)
+      btnSearch.addEventListener("click", funcSearch)
+      txtFruit.addEventListener("focus", function () {
+        this.select();
+      })
+    }
+
+    let divData;
+    let txt;
+
+    function funcAdd() {
+      divData = '';
+      //텍스트필드에 입력한 값을 배열에 추가하고 배열을 div에 출력
+
+      // 입력받은 데이터
+      txt = document.querySelector('#txtFruit').value.trim();
+
+      // 입력받은 데이터를 배열에 추가
+      if (txt) {
+        txtArr.push(txt);
+      }
+      // div에 출력할 전체 데이터
+      for (let i = 0; i < txtArr.length; i++) {
+        if (i == 0) {
+          divData += txtArr[i];
+        } else {
+          divData += ',' + txtArr[i];
+        }
+      }
+      output();
+    }
+
+    function output() {
+      // 실제 출력
+      if (txtArr.length > 0) {
+        document.querySelector("#result").innerText = divData;
+      }
+    }
+
+    function funcDelete() {
+      //텍스트필드에 입력한 값을 배열에서 삭제하고 배열을 div에 출력
+
+      // 입력받은 데이터
+      txt = document.querySelector('#txtFruit').value.trim();
+      let index =txtArr.indexOf(txt);
+      if (index < 0){
+        document.querySelector("#result").innerText = divData + '\n' + `존재하지 않는 데이터입니다.` + '\n다시 확인해주세요.';
+        return;
+      } 
+      let arr= [];
+      for (let i = 0; i < txtArr.length; i++) {
+        if (i == index) {
+          continue;
+        } 
+        arr.push(txtArr[i]);
+      }
+      txtArr = arr;
+      divData = '';
+      // div에 출력할 전체 데이터
+      for (let i = 0; i < txtArr.length; i++) {
+        if (i == 0) {
+          divData += txtArr[i];
+        } else {
+          divData += ',' + txtArr[i];
+        }
+      }
+      output();
+    }
+
+    function funcSearch() {
+      //텍스트필드에 입력한 값을 배열에서 검색해서 검색위치를 div출력
+      //코드 작성
+      txt = document.querySelector('#txtFruit').value.trim();
+      if (txtArr.indexOf(txt) < 0) { // -1은 검색결과없음
+        //output();
+        document.querySelector("#result").innerText = divData + '\n' + `검색결과가 없습니다.`;
+        return;
+      }
+      document.querySelector("#result").innerText = divData + '\n' + `검색위치: ${txtArr.indexOf(txt)}`;
+    }
+  </script>
+</head>
+
+<body>
+  <input type="text" id="txtFruit">
+  <button type="button" id="btnAdd">추가</button>
+  <button type="button" id="btnDelete">삭제</button>
+  <button type="button" id="btnSearch">검색</button>
+  <div id="result"></div>
+</body>
+
+</html>
