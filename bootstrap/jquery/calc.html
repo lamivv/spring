@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <input id="num1">
+  <input id="num2">
+  <button type="button" id="btn">계산</button>
+  <div id="result"></div>
+  <script>
+    // 버튼 클릭 이벤트 지정
+    // 클릭하면 num1 과 num2를 더해서 result에 출력
+
+    // document.querySelector('#btn').addEventListener('click',function(){
+    //   let num1 = document.querySelector('#num1').value;
+    //   let num2 = document.querySelector('#num2').value;
+    //   result.innerHTML= Number(num1)+Number(num2);
+    //   console.log(num1);
+    // })
+
+    //let btn = $('#btn');
+    //let num1 = $('#num1');
+    //let num2 = $('#num2');
+    //let result = $('#result');
+
+    // $('#btn').on("click", () => {
+    //   $('#result').html(Number($('#num1').val()) + Number($('#num2').val()));
+    // })
+
+    $('#btn').on("click", () => {
+      let num1 = Number($("#num1").val());
+      let num2 = Number($("#num2").val());
+      $('#result').html( num1 + num2 );
+    })
+  </script>
+
+</body>
+
+</html>

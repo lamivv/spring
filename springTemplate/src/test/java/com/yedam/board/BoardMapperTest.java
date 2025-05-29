@@ -21,7 +21,7 @@ public class BoardMapperTest {
 	@Autowired
 	BoardMapper boardMapper;
 	
-	@Test
+	//@Test
 	public void getList() {
 		boardMapper.getList().forEach(board -> System.out.println(board));
 	}

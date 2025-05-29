@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <input id="txtFruit">
+  <button type="button" id="btnAdd" onclick="addFruit()">추가</button><br>
+  <button type="button" onclick="removeFruit()">삭제</button><br>
+  <select id="selFruit" size="10">
+    <option>사과</option>
+  </select>
+
+  <script>
+    function addFruit() {
+      // 텍스트 입력값을 변수에 저장
+      let name = document.querySelector("#txtFruit").value;
+      let html = "<option>" + name + "</option>";
+
+      // select 태그에 추가
+      //selFruit.insertAdjacentHTML("beforeEnd",html);
+      selFruit.insertAdjacentHTML("beforeEnd", `<option>${name}</option>`);
+
+      // 텍스트 필드 초기화
+      document.querySelector("#txtFruit").value = null;
+    }
+    
+    txtFruit.addEventListener("keypress", (e) => {
+      if (e.keyCode == 13) { // enter키
+        btnAdd.click()
+      }
+    })
+  </script>
+</body>
+
+</html>

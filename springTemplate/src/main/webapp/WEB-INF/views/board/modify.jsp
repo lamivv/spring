@@ -2,13 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<%@ include file="/WEB-INF/views/includes/header.jsp"%>
 Board Modify
 	<form role="from" action="<c:url value="/board/modify"/>" method="post">
 	<!-- <form role="from" action="register" method="post"> -->
@@ -25,5 +19,4 @@ Board Modify
 		<button type="submit" class="btn btn-default">Submit Button</button>
 		<button type="reset" class="btn btn-default">Reset Button</button>
 	</form>
-</body>
-</html>
+<%@ include file="/WEB-INF/views/includes/footer.jsp"%>

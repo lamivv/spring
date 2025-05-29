@@ -3,16 +3,19 @@ package com.yedam.board.service;
 import java.util.List;
 
 public interface BoardService {
-	public List<BoardVO> getList();
+	public List<BoardVO> getList(Criteria cri);
 	
-	List<BoardVO> findAll(BoardVO boardVO);
+	public Long getTotal(Criteria cri);
 
-	BoardVO findById(int bno);
+	public List<BoardVO> findAll(BoardVO boardVO);
 
-	int insert(BoardVO boardVO);
+	public BoardVO findById(int bno);
 
-	int update(BoardVO boardVO);
+	public int insert(BoardVO boardVO);
 
-	int delete(int bno);	
+	public int update(BoardVO boardVO);
+
+	public int delete(int bno);	
+		
 }
 	
