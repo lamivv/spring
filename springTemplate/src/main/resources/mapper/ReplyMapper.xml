@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yedam.board.mapper.ReplyMapper">
+
+	<insert id="insert" parameterType="com.yedam.board.service.ReplyVO">
+		<selectKey keyProperty="rno" order="BEFORE" resultType="long">
+			select seq_reply.nextval from dual
+		</selectKey>
+		INSERT INTO tbl_reply (rno, 
+							 bno, 
+							 reply, 
+							 replyer) 
+		VALUES (#{rno},
+				#{bno},
+				#{reply},
+				#{replyer})
+	</insert>
+	
+	<select id="read" parameterType="long" resultType="com.yedam.board.service.ReplyVO">
+		SELECT * 
+		FROM tbl_reply
+		WHERE rno = #{rno}
+	</select>
+	
+	<delete id="delete" parameterType="long">
+		DELETE FROM tbl_reply
+		WHERE rno = #{rno}
+	</delete>
+	
+	<update id="update" parameterType="com.yedam.board.service.ReplyVO">
+		UPDATE tbl_reply
+		SET 
+			reply = #{reply},
+			replyer = #{replyer},
+			updateDate = sysdate
+		WHERE rno = #{rno}
+	</update>
+	
+	<sql id="criteria">
+		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+			<foreach item='type' collection="typeArr">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'T'.toString()">
+							title like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'C'.toString()">
+							content like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'W'.toString()">
+							writer like '%'||#{keyword}||'%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+	
+	<select id="getList" resultType="com.yedam.board.service.ReplyVO">
+		SELECT *
+		FROM tbl_reply
+		WHERE bno = #{bno}
+		<!-- <include refid="criteria"></include> -->
+	</select>
+</mapper>

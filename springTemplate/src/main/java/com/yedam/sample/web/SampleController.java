@@ -1,21 +1,27 @@
 package com.yedam.sample.web;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
+
 import java.util.Locale;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.yedam.SampleVO;
 import com.yedam.sample.service.TimeService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 
+
 @Slf4j
 @RequiredArgsConstructor
 @Controller
+
 public class SampleController {
 	
     private final TimeService timeService;

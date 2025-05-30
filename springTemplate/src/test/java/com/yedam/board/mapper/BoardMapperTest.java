@@ -1,4 +1,4 @@
-package com.yedam.board;
+package com.yedam.board.mapper;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,10 +21,10 @@ public class BoardMapperTest {
 	@Autowired
 	BoardMapper boardMapper;
 	
-	//@Test
-	public void getList() {
-		boardMapper.getList().forEach(board -> System.out.println(board));
-	}
+//	//@Test
+//	public void getList() {
+//		boardMapper.getList().forEach(board -> System.out.println(board));
+//	}
 
 	//@Test
 	public void findAll() {

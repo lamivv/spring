@@ -1,4 +1,4 @@
-package com.yedam.board;
+package com.yedam.board.service;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

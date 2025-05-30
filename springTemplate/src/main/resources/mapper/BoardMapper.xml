@@ -88,10 +88,10 @@
 		parameterType="com.yedam.board.service.BoardVO">
 		update tbl_board
 		set TITLE = #{title},
-		content =
-		#{content},
-		writer = #{writer},
-		updateDate = sysdate
+			content =
+			#{content},
+			writer = #{writer},
+			updateDate = sysdate
 		where BNO = #{bno}
 	</update>
 
