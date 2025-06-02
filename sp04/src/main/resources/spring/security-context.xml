@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:tx="http://www.springframework.org/schema/tx"
+xmlns:context="http://www.springframework.org/schema/context"
+xmlns:aop="http://www.springframework.org/schema/aop"
+xmlns:security="http://www.springframework.org/schema/security"
+xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
+http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd
+http://www.springframework.org/schema/security https://www.springframework.org/schema/security/spring-security.xsd
+http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/tx https://www.springframework.org/schema/tx/spring-tx.xsd">
+	
+	<security:http pattern="/css/**" security="none"/> 
+		<security:http> 
+			<!-- <security:intercept-url pattern="/**" access="permitAll()"/> --> <!-- 모든페이지/모든사람 접근 권한 -->
+			<!-- <security:intercept-url pattern="/member/**" access="hasRole('ROLE_USER')"/> --> <!-- member페이지/USER 접근 권한 -->
+			<!-- <security:intercept-url pattern="/" access="permitAll()"/> --> <!-- 메인페이지/모든사람 접근 권한 -->
+			<!-- <security:intercept-url pattern="/admin/**" access="hasAuthority('ROLE_ADMIN')"/> --> 
+			
+			<security:intercept-url pattern="/all" access="permitAll()"/> <!-- all페이지/모든사람 접근 권한 -->
+			<security:intercept-url pattern="/login" access="permitAll()"/> <!-- 로그인 페이지/모든사람 접근 권한 -->
+			<security:intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')"/> <!-- admin페이지/ (인가)ADMIN 접근 권한 -->
+			<security:intercept-url pattern="/**" access="isAuthenticated()"/> <!-- 나머지 모든경로 / (인증)로그인여부 -->  
+			
+			<!-- <security:form-login /> --> 
+			<security:form-login login-page="/login"/> 
+		
+			<!-- <security:access-denied-handler error-page="/accessError"/> --> <!-- 403에러 페이지 꾸미기 view페이지 적어줌 -->
+			<security:access-denied-handler ref="deniedHandler"/> <!-- 403에러 페이지 클래스명 제일 앞만 소문자로 변경 or component 알리아스 사용 -->
+			
+			<!-- <security:intercept-url pattern="/top.jsp" access="permitAll()"/> -->
+			<!-- <security:form-login default-target-url="/top.jsp"/> --> 
+			<!-- <security:logout logout-url="/logout" logout-success-url="/top.jsp"/> --> 
+			<!-- <security:csrf disabled="true"/> -->
+			
+			 
+		</security:http> 
+	<security:authentication-manager> 
+		<security:authentication-provider> 
+			<security:user-service> 
+				<security:user name="user" password="{noop}1234" authorities="ROLE_USER"/> 
+				<security:user name="admin" password="{noop}1234" authorities="ROLE_ADMIN"/> 
+			</security:user-service> 
+		</security:authentication-provider> 
+	</security:authentication-manager>
+	
+</beans>
