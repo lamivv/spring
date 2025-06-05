@@ -13,6 +13,10 @@ http://www.springframework.org/schema/security https://www.springframework.org/s
 http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 http://www.springframework.org/schema/tx https://www.springframework.org/schema/tx/spring-tx.xsd">
 	
+	<bean id="webexpressionHandler" class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler" />
+	
+	<bean id="loginSuccessHandler" class="com.company.common.security.CustomLoginSuccessHandler"></bean>
+	
 	<security:http pattern="/css/**" security="none"/> 
 		<security:http> 
 			<!-- <security:intercept-url pattern="/**" access="permitAll()"/> --> <!-- 모든페이지/모든사람 접근 권한 -->
@@ -20,30 +24,32 @@ http://www.springframework.org/schema/tx https://www.springframework.org/schema/
 			<!-- <security:intercept-url pattern="/" access="permitAll()"/> --> <!-- 메인페이지/모든사람 접근 권한 -->
 			<!-- <security:intercept-url pattern="/admin/**" access="hasAuthority('ROLE_ADMIN')"/> --> 
 			
+			<security:intercept-url pattern="/" access="permitAll()"/> <!-- all페이지/모든사람 접근 권한 -->
 			<security:intercept-url pattern="/all" access="permitAll()"/> <!-- all페이지/모든사람 접근 권한 -->
 			<security:intercept-url pattern="/login" access="permitAll()"/> <!-- 로그인 페이지/모든사람 접근 권한 -->
 			<security:intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')"/> <!-- admin페이지/ (인가)ADMIN 접근 권한 -->
 			<security:intercept-url pattern="/**" access="isAuthenticated()"/> <!-- 나머지 모든경로 / (인증)로그인여부 -->  
-			
+			<security:logout/>
 			<!-- <security:form-login /> --> 
-			<security:form-login login-page="/login"/> 
+			<!-- <security:form-login login-page="/login"/>  -->
+			<security:form-login login-page="/login" authentication-success-handler-ref="loginSuccessHandler" default-target-url="/all"/>
 		
 			<!-- <security:access-denied-handler error-page="/accessError"/> --> <!-- 403에러 페이지 꾸미기 view페이지 적어줌 -->
 			<security:access-denied-handler ref="deniedHandler"/> <!-- 403에러 페이지 클래스명 제일 앞만 소문자로 변경 or component 알리아스 사용 -->
 			
 			<!-- <security:intercept-url pattern="/top.jsp" access="permitAll()"/> -->
-			<!-- <security:form-login default-target-url="/top.jsp"/> --> 
 			<!-- <security:logout logout-url="/logout" logout-success-url="/top.jsp"/> --> 
-			<!-- <security:csrf disabled="true"/> -->
-			
-			 
+			<!-- <security:csrf disabled="true"/> --><!-- 토큰을 사용하지 않겠음 -->
+					 
 		</security:http> 
 	<security:authentication-manager> 
-		<security:authentication-provider> 
-			<security:user-service> 
+		<security:authentication-provider user-service-ref="customUserDetailsService">
+			<security:password-encoder hash="bcrypt"/>
+		 
+			<!-- <security:user-service> 
 				<security:user name="user" password="{noop}1234" authorities="ROLE_USER"/> 
 				<security:user name="admin" password="{noop}1234" authorities="ROLE_ADMIN"/> 
-			</security:user-service> 
+			</security:user-service>  -->
 		</security:authentication-provider> 
 	</security:authentication-manager>
 	

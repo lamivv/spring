@@ -7,8 +7,10 @@ import com.company.sample.service.SampleService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 
 //@AllArgsConstructor
+@Log4j2
 @RequiredArgsConstructor
 @Controller // view리졸브... return이 view파일 명을 말함
 public class SampleController {
@@ -25,6 +27,4 @@ public class SampleController {
 	public void all(HttpServletRequest request) {
 		System.out.println(request.getRequestURI());
 	}
-	
-	
 }
